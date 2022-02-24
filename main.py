@@ -128,7 +128,7 @@ def process_data(df_):
 
 
 def get_raw_data(file_name, code):
-    dsn = cx_Oracle.makedsn('192.168.170.52', '1561', service_name='DW')
+    dsn = cx_Oracle.makedsn('IP', '1561', service_name='DW')
 
     conn = cx_Oracle.connect(
         user='sas',
@@ -159,9 +159,9 @@ def get_raw_data(file_name, code):
 
 def get_death_raw_data():
     server = '192.168.170.60\mssqlserver1'
-    database = 'DOHDied'
-    username = 'cdceic'
-    password = '6&*cTNwg'
+    database = 'db_name'
+    username = 'username'
+    password = 'pwd'
     string = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password};"
     cnxn = pyodbc.connect(string)
     df_death = pd.read_sql("select DhDeathID,DhDeathName,convert(datetime,DhDeathDay) as DeathDate from DohDied where convert(datetime,DhDeathDay) >= '2021-04-20'", cnxn)
